@@ -7,41 +7,108 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@600;700&display=swap');
 
+  /* ── THEME VARIABLES ── */
+  :root {
+    --bg:               #0f0f14;
+    --body-color:       #e0e0e0;
+    --nav-bg:           rgba(15,15,20,0.92);
+    --nav-border:       rgba(255,255,255,0.06);
+    --nav-h1:           #ffffff;
+    --pill-bg:          rgba(255,255,255,0.06);
+    --pill-color:       #aaa;
+    --pill-hover-bg:    rgba(255,255,255,0.1);
+    --pill-hover-color: #ddd;
+    --spec-bg:          rgba(255,255,255,0.03);
+    --spec-border:      rgba(255,255,255,0.07);
+    --spec-h2:          #ffffff;
+    --spec-subtitle:    #888;
+    --spec-label:       #777;
+    --spec-value:       #ccc;
+    --spec-strong:      #ffffff;
+    --spec-divider:     rgba(255,255,255,0.06);
+    --metric-bg:        rgba(255,255,255,0.04);
+    --chrome-bg:        #1a1a22;
+    --chrome-border:    rgba(255,255,255,0.07);
+    --chrome-shadow:    0 20px 60px rgba(0,0,0,0.5);
+    --toolbar-bg:       rgba(255,255,255,0.03);
+    --toolbar-border:   rgba(255,255,255,0.06);
+    --from-color:       #888;
+    --from-strong:      #ccc;
+    --toggle-bg:        rgba(255,255,255,0.08);
+    --toggle-border:    rgba(255,255,255,0.12);
+    --toggle-color:     #ccc;
+    --toggle-hover-bg:  rgba(255,255,255,0.14);
+  }
+  body.light {
+    --bg:               #f0eff5;
+    --body-color:       #2a2a3a;
+    --nav-bg:           rgba(255,255,255,0.9);
+    --nav-border:       rgba(0,0,0,0.08);
+    --nav-h1:           #1a1a2e;
+    --pill-bg:          rgba(0,0,0,0.05);
+    --pill-color:       #666;
+    --pill-hover-bg:    rgba(0,0,0,0.09);
+    --pill-hover-color: #333;
+    --spec-bg:          #ffffff;
+    --spec-border:      rgba(0,0,0,0.09);
+    --spec-h2:          #1a1a2e;
+    --spec-subtitle:    #777;
+    --spec-label:       #999;
+    --spec-value:       #555;
+    --spec-strong:      #1a1a2e;
+    --spec-divider:     rgba(0,0,0,0.08);
+    --metric-bg:        rgba(0,0,0,0.04);
+    --chrome-bg:        #ffffff;
+    --chrome-border:    rgba(0,0,0,0.1);
+    --chrome-shadow:    0 12px 40px rgba(0,0,0,0.12);
+    --toolbar-bg:       #f5f4f9;
+    --toolbar-border:   rgba(0,0,0,0.08);
+    --from-color:       #777;
+    --from-strong:      #333;
+    --toggle-bg:        rgba(0,0,0,0.06);
+    --toggle-border:    rgba(0,0,0,0.1);
+    --toggle-color:     #555;
+    --toggle-hover-bg:  rgba(0,0,0,0.1);
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: #0f0f14;
-    color: #e0e0e0;
+    background: var(--bg);
+    color: var(--body-color);
     min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
   }
 
   /* ── NAV BAR ── */
   .nav-bar {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(15,15,20,0.92);
+    background: var(--nav-bg);
     backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid var(--nav-border);
     padding: 16px 32px;
     display: flex; align-items: center; gap: 20px;
+    transition: background 0.3s, border-color 0.3s;
   }
   .nav-bar h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 18px; font-weight: 600; color: #fff;
+    font-size: 18px; font-weight: 600; color: var(--nav-h1);
     white-space: nowrap;
+    transition: color 0.3s;
   }
   .nav-bar .pill-track {
-    display: flex; gap: 6px; flex-wrap: wrap;
+    display: flex; gap: 6px; flex-wrap: wrap; flex: 1;
   }
   .nav-bar .pill {
     padding: 7px 16px; border-radius: 100px;
     font-size: 13px; font-weight: 500;
     cursor: pointer; transition: all 0.25s;
-    background: rgba(255,255,255,0.06);
-    color: #aaa; border: 1px solid transparent;
+    background: var(--pill-bg);
+    color: var(--pill-color); border: 1px solid transparent;
     white-space: nowrap;
   }
-  .nav-bar .pill:hover { background: rgba(255,255,255,0.1); color: #ddd; }
+  .nav-bar .pill:hover { background: var(--pill-hover-bg); color: var(--pill-hover-color); }
   .nav-bar .pill.active {
     background: linear-gradient(135deg, #6C3AE1, #A855F7);
     color: #fff; border-color: rgba(168,85,247,0.4);
@@ -53,6 +120,35 @@
     background: rgba(255,255,255,0.15);
   }
   .nav-bar .pill.active .tag { background: rgba(255,255,255,0.25); }
+
+  /* ── THEME TOGGLE ── */
+  .theme-toggle {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--toggle-bg);
+    border: 1px solid var(--toggle-border);
+    border-radius: 100px; padding: 6px 14px;
+    cursor: pointer; flex-shrink: 0;
+    color: var(--toggle-color);
+    font-size: 13px; font-weight: 500;
+    transition: all 0.25s;
+    user-select: none;
+  }
+  .theme-toggle:hover { background: var(--toggle-hover-bg); }
+  .theme-toggle .toggle-track {
+    width: 32px; height: 18px; border-radius: 100px;
+    background: #6C3AE1; position: relative;
+    transition: background 0.25s; flex-shrink: 0;
+  }
+  body.light .theme-toggle .toggle-track { background: #A855F7; }
+  .theme-toggle .toggle-thumb {
+    position: absolute; top: 2px; left: 2px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: #fff;
+    transition: transform 0.25s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+  body.light .theme-toggle .toggle-thumb { transform: translateX(14px); }
+  .toggle-icon { font-size: 14px; line-height: 1; }
 
   /* ── MAIN LAYOUT ── */
   .main { padding: 100px 32px 60px; max-width: 1280px; margin: 0 auto; }
@@ -66,27 +162,29 @@
     flex: 0 0 320px; position: sticky; top: 100px; align-self: flex-start;
   }
   .spec-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.07);
+    background: var(--spec-bg);
+    border: 1px solid var(--spec-border);
     border-radius: 16px; padding: 28px;
+    transition: background 0.3s, border-color 0.3s;
   }
   .spec-card h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 22px; color: #fff; margin-bottom: 4px;
+    font-size: 22px; color: var(--spec-h2); margin-bottom: 4px;
+    transition: color 0.3s;
   }
-  .spec-card .subtitle { font-size: 13px; color: #888; margin-bottom: 20px; }
+  .spec-card .subtitle { font-size: 13px; color: var(--spec-subtitle); margin-bottom: 20px; transition: color 0.3s; }
   .spec-row { display: flex; gap: 10px; margin-bottom: 14px; }
-  .spec-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: #777; min-width: 70px; padding-top: 2px; }
-  .spec-value { font-size: 13px; color: #ccc; line-height: 1.5; }
-  .spec-value strong { color: #fff; }
-  .spec-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 16px 0; }
+  .spec-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--spec-label); min-width: 70px; padding-top: 2px; transition: color 0.3s; }
+  .spec-value { font-size: 13px; color: var(--spec-value); line-height: 1.5; transition: color 0.3s; }
+  .spec-value strong { color: var(--spec-strong); }
+  .spec-divider { height: 1px; background: var(--spec-divider); margin: 16px 0; transition: background 0.3s; }
   .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
   .metric-box {
-    background: rgba(255,255,255,0.04); border-radius: 10px; padding: 12px;
-    text-align: center;
+    background: var(--metric-bg); border-radius: 10px; padding: 12px;
+    text-align: center; transition: background 0.3s;
   }
   .metric-box .num { font-size: 20px; font-weight: 700; color: #A855F7; }
-  .metric-box .lbl { font-size: 10px; color: #888; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-box .lbl { font-size: 10px; color: var(--spec-subtitle); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
   .trigger-badge {
     display: inline-flex; align-items: center; gap: 6px;
     background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.25);
@@ -102,25 +200,27 @@
   }
   .email-chrome {
     width: 100%; max-width: 640px;
-    background: #1a1a22;
+    background: var(--chrome-bg);
     border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.07);
+    border: 1px solid var(--chrome-border);
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    box-shadow: var(--chrome-shadow);
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
   }
   .email-toolbar {
     display: flex; align-items: center; gap: 12px;
     padding: 14px 20px;
-    background: rgba(255,255,255,0.03);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: var(--toolbar-bg);
+    border-bottom: 1px solid var(--toolbar-border);
+    transition: background 0.3s, border-color 0.3s;
   }
   .dots { display: flex; gap: 6px; }
   .dots span { width: 10px; height: 10px; border-radius: 50%; }
   .dots span:nth-child(1) { background: #ff5f57; }
   .dots span:nth-child(2) { background: #febc2e; }
   .dots span:nth-child(3) { background: #28c840; }
-  .email-toolbar .from-line { font-size: 12px; color: #888; margin-left: 8px; }
-  .email-toolbar .from-line strong { color: #ccc; }
+  .email-toolbar .from-line { font-size: 12px; color: var(--from-color); margin-left: 8px; transition: color 0.3s; }
+  .email-toolbar .from-line strong { color: var(--from-strong); }
 
   .email-body {
     background: #ffffff;
@@ -953,6 +1053,18 @@ const emails = [
   }
 ];
 
+// ── THEME TOGGLE ──
+let isDark = true;
+function applyTheme() {
+  document.body.classList.toggle('light', !isDark);
+  const icon = document.querySelector('.toggle-icon');
+  const label = document.querySelector('.toggle-label');
+  if (icon) icon.textContent = isDark ? '🌙' : '☀️';
+  if (label) label.textContent = isDark ? 'Dark' : 'Light';
+}
+
+// toggle will be appended after pills render
+
 // ── RENDER NAV ──
 const pillTrack = document.getElementById('pillTrack');
 emails.forEach((e, i) => {
@@ -963,6 +1075,17 @@ emails.forEach((e, i) => {
   pill.addEventListener('click', () => switchEmail(i));
   pillTrack.appendChild(pill);
 });
+
+// Append toggle after pill-track
+const toggleBtn = document.createElement('div');
+toggleBtn.className = 'theme-toggle';
+toggleBtn.innerHTML = `
+  <span class="toggle-icon">🌙</span>
+  <div class="toggle-track"><div class="toggle-thumb"></div></div>
+  <span class="toggle-label">Dark</span>
+`;
+toggleBtn.addEventListener('click', () => { isDark = !isDark; applyTheme(); });
+document.querySelector('.nav-bar').appendChild(toggleBtn);
 
 // ── RENDER EMAILS ──
 const main = document.getElementById('mainContent');
